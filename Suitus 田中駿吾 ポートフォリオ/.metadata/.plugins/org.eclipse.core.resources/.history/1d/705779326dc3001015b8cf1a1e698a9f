@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+.wrap {
+	width: 50%;
+    margin: 0 auto;
+}
+
+.usingImage img {
+    height: 300px;
+	width: 100%;
+	object-fit: cover;
+	object-position: 50% 80%;
+}
+h2 {
+	font-size: 2.5rem;
+	font-weight: 400;
+	color: #111;
+	text-align: center;	
+}
+
+img[src="useball.png"] {
+	position: absolute;
+	left: 10%;
+}
+
+.usingImage > h1 {
+	position: absolute;
+	font-family: fantasy;
+	letter-spacing: 2px;
+	color: white;
+	font-size: 40px;
+	font-weight: 100;
+	bottom: 40px;
+	left: 40px;
+	padding: 0;
+	margin: 0;
+}
+
+.flex {
+	display: flex;
+	gap: 12px;
+    margin-top: 0px;
+    flex-wrap: wrap;
+}
+.products {
+	display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.productImage {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 140px;
+    height: 168px;
+	background-color: rgba(0,0,0,0.15);
+}
+
+.productImage img {
+	position: relative;
+	top: 5px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 90%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.contents {
+	display: block;
+	margin-top: 0;
+	margin-bottom: 5px;
+	font-size: 18px;
+}
+
+.contents.category {
+	font-size: 16px;
+    padding-bottom: 6px;
+}
+
+.price {
+	font-size: 1.4rem;
+}
+
+.product button {
+	margin-top: 18px;
+	margin-bottom: 18px;
+	padding: 0;
+	font-size: 18px;
+	width: 100px;
+}
+
+.backbutton {
+	display: inline-block;
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-left: 0;
+}
+
+#countResults {
+	background-color: #d6d7df;
+	width: 100px;
+	height: 60px;
+	padding: 10px;
+	border-radius: 12px 12px 0 0;
+	margin-top: 10px;
+	color: white;
+	font-size: 18px;
+}
+
+#countResults span {
+	display: block;
+}
+
+.total {
+	width: 5em;
+	font-size: 1.4em;
+	letter-spacing: 3px;
+}
+
+.total::after {
+	content: "件";
+	display: inline-block;
+	font-size: 0.7em;
+}
+
+/* 購入ページ */
+.detail {
+	display: flex;
+	gap: 20px;
+	width: 100%;
+}
+
+.description {
+	margin-top: 20px;
+}
+
+#product-title {
+	font-size: 28px;
+}

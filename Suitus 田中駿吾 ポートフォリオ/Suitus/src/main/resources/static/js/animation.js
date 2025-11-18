@@ -1,0 +1,34 @@
+
+//参考:https://zenn.dev/misumith/articles/c2fe544ba06fb2
+const shuffleNumberCounter = (target) => {
+  const targetNum = Number(target.getAttribute('data-num'))
+  console.log(targetNum,target);
+  if (!targetNum) {
+    return
+  }
+
+  let counterData = null
+  const speed = 400 / targetNum
+  let initNum = 0
+
+  const countUp = () => {
+    if (Number.isInteger(targetNum)) {
+      target.innerHTML = initNum
+    } else {
+      target.innerHTML = `${initNum}.${Math.floor(Math.random() * 9)}`
+    }
+
+    initNum++
+
+    if (initNum > targetNum) {
+      target.innerHTML = targetNum
+      clearInterval(counterData)
+    }
+  }
+  
+  counterData = setInterval(countUp, speed)
+}
+
+const target = document.querySelector('.total');
+
+shuffleNumberCounter(target)

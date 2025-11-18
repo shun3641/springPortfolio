@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログインページ | 業務用アプリケーション</title>
+  <!-- Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<header class="mb-4" style="margin: 5px">
+  <h1>業務管理アプリケーション</h1>
+</header>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="text-left">
+    <form action="#" th:action="@{/login}" method="post" style="width: 300px; margin: 0 auto">
+      <div class="form-group">
+        <label for="usernameInput">ユーザー名</label>
+        <input type="text" id="usernameInput" name="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">パスワード</label>
+        <input type="password" id="passwordInput" name="password" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">ログイン</button>
+    </form>
+    <!-- パラメータ error が存在する場合のみ表示 -->
+    <div th:if="${param.error}" class="alert alert-danger mt-3" style="width: 300px; margin: 0 auto;">
+      ユーザ名またはパスワードが違います。アカウントがない場合は新規登録してください。
+    </div>
+    <a th:href="@{/user/signin}"><button type="button" class="btn btn-success mt-4">新規登録する</button></a>
+  </div>
+</div>
+</body>
+</html>

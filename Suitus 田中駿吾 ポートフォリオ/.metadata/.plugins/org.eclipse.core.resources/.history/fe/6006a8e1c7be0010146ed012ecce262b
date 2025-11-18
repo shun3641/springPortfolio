@@ -1,0 +1,57 @@
+<!-- 再利用のため、フラグメントを登録 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Insert title here</title>
+</head>
+<body>
+<header th:fragment="siteHeader">
+<div class="p_infobar_content">
+Amazonプライム感謝祭実施中。セール会場はこちら
+</div>
+	
+<div class="l-header-content">
+
+<div class="logo">
+<a th:href="@{/index}">
+<img src="/image/logo.png">
+</a>
+<span>SuiTus</span>
+</div>
+<nav id="header-navigation">
+	<ul>
+<!-- 	カテゴリー名を変更するときはparamの値とaタグのテキストを変更すればよい
+データベースのフィールド名も書き換えておく -->
+	<li><a th:href="@{/items/ball(param='ボール')}">ボール</a></li>
+	<li><a th:href="@{/items/shoes(param='シューズ')}">シューズ</a></li>
+	<li><a th:href="@{/items/training(param='トレーニング')}">トレーニング</a></li>
+	<li><a th:href="@{/items/cap(param='キャップ')}">キャップ</a></li>
+	<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
+	<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
+	</ul>
+</nav>
+</div>
+
+<button class="c-hamburger-btn btn" aria-expanded="false" aria-controls="drawer-nav">
+	<span class="c-hamburger-btn__bars">
+		<span class="c-hamburger-btn__bar"></span>
+		<span class="c-hamburger-btn__bar"></span>
+		<span class="c-hamburger-btn__bar"></span>
+	</span>
+</button>
+	<nav class="sp-menu">
+	<ul>
+		<li><a th:href="@{/items/ball(param='ボール')}">ボール</a></li>
+		<li><a th:href="@{/items/wear(param='ウェア')}">ウェア</a></li>
+		<li><a th:href="@{/items/training(param='トレーニング')}">トレーニング</a></li>
+		<li><a th:href="@{/items/cap(param='キャップ')}">キャップ</a></li>
+		<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
+		<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
+	</ul>
+	</nav>	
+</header>
+</body>
+</html>

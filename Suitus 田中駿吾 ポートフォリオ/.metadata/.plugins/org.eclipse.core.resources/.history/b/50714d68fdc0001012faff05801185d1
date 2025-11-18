@@ -1,0 +1,34 @@
+
+$(function(){
+  $(".btn").on("click", function(){
+	$(".btn").toggleClass("active");
+    $(".sp-menu").toggleClass("open");
+  });
+  
+/*  sp-menuの現urlに一致するaタグにactiveクラス(薄い背景)を付与　*/  
+　　
+　　let pathName = $(location).attr('pathname');
+
+  console.log(pathName);
+	$.each($(".sp-menu a"), function(i, a){
+/*	aの中身<a href="/ball" class="active">ボール</a>　*/		console.log(a.getAttribute("href"));
+			if(a.getAttribute("href")==pathName) {
+					/* aをオブジェクト化 */
+					$(a).addClass("active");
+					
+				  };
+	      })
+		  
+	var form = document.forms.myform;
+	form.category.addEventListener('change', function() {
+		console.log('状態が変化しました！');
+
+		  	  
+		      //submit()でフォームの内容を送信
+		      document.myform.submit();
+			  element.scrollIntoView({ behavior: 'smooth' }); // スムーズなスクロール
+			             // または、URLのハッシュを変更して遷移先に移動
+			  window.location.hash = 'myform';
+	});
+	
+  })

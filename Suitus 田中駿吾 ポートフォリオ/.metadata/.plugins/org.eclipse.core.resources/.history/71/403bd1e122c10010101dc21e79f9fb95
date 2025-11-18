@@ -1,0 +1,44 @@
+package com.example.demo.service;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Items;
+import com.example.demo.model.Users;
+import com.example.demo.repository.ItemRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+
+@Service
+public class ItemService {
+	
+	@Autowired
+    private EntityManager entityManager;
+	
+	@Autowired
+	ItemRepository itemRepository;
+	
+	public List<Items> showItemAll() {
+		return itemRepository.findAll();
+	}
+	
+	public boolean checkLogic(String regex, String target) {
+	    boolean result = true;
+	    System.out.println(target);
+	    if( target == null || target.isEmpty() ) return false ;
+	    // 3. 引数に指定した正規表現regexがtargetにマッチするか確認する
+	    Pattern p1 = Pattern.compile(regex); // 正規表現パターンの読み込み
+	    Matcher m1 = p1.matcher(target); // パターンと検査対象文字列の照合
+	    result = m1.matches(); // 照合結果をtrueかfalseで取得
+	    return result;
+	  }
+
+}

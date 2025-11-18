@@ -1,0 +1,43 @@
+  <!DOCTYPE html>
+  <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/header.css}" rel="stylesheet">
+  <link th:href="@{/css/product.css}" rel="stylesheet">
+  <title>商品一覧</title>
+  </head>
+  <body>
+  	<!-- 再利用のため、フラグメントを呼び出し -->
+	<div th:replace="~{base :: siteHeader}"></div>
+	<div class="usingImage ball">
+	<img id="useImage" src="">
+	</div>
+	<main>
+	<div class="wrap">
+	<div id="countResults"><span>対象商品</span><span id="total" data-num="${total}" th:text="${total}"></span></div>
+	<div class="flex">
+	
+<div class="products" th:each="item: ${items}">
+<div class="product">
+<a>
+<span class="productImage">
+<img th:src="${item.imageurl}">
+</span>
+<span class="contents" th:text="${item.name}"></span>
+<span class="contents text">カテゴリー</span>
+<span class="contents category" th:text="${item.category}"></span>
+<span th:text="${item.description}"></span><br>
+<span class="price" th:text="${item.price}"></span><small>円(税込)</small>
+<br>
+<button>詳細 ↠</button>
+</a>
+</div>
+</div>
+</div>
+<a class="backbutton" th:href="@{/index}">戻る</a>
+</div>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="/js/top.js"></script>
+  </body>
+  </html>

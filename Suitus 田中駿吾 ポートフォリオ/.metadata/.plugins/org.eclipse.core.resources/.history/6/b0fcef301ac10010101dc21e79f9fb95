@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" 
+xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/admin/css/application.css}" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>ユーザーリスト</h3>
+<table>
+  <caption>
+    フロントエンドウェブ開発者コース 2021
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">名前</th>
+      <th scope="col">関心分野</th>
+      <th scope="col">年齢</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Chris</th>
+      <td>HTML 表</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th scope="row">Dennis</th>
+      <td>ウェブアクセシビリティ</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th scope="row">Sarah</th>
+      <td>JavaScript フレームワーク</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th scope="row">Karen</th>
+      <td>ウェブパフォーマンス</td>
+      <td>36</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row" colspan="2">平均年齢</th>
+      <td>33</td>
+    </tr>
+  </tfoot>
+</table>
+</body>
+</html>

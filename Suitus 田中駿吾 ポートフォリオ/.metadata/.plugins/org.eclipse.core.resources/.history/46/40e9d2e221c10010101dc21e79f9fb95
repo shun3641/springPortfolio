@@ -1,0 +1,41 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Items;
+import com.example.demo.model.Users;
+import com.example.demo.repository.ItemRepository;
+
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+
+@Service
+public class ItemService {
+	
+	@Autowired
+	ItemRepository itemRepository;
+	
+	public List<Items> showItemAll() {
+		return itemRepository.findAll();
+	}
+	
+	public List<Users> getProductCount() {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Users> query = cb.createQuery(Users.class);
+        Root<Users> root = query.from(Users.class);
+
+        query.select(root).orderBy(cb.asc(root.get("id")));
+     // 5. TypedQueryの作成
+        TypedQuery<Users> typedQuery = entityManager.createQuery(query);
+
+        // 6. クエリの実行と結果リストの取得
+        List<Users> resultList = typedQuery.getResultList();
+        return resultList;
+    }
+
+}

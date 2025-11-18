@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+
+<!-- 勝手にマッピングされ、エラーが出ることがあるため、必ず相対パスでなく、絶対パスで指定 -->
+<link th:href="@{/admin/css/app_header.css}" rel="stylesheet">
+<link th:href="@{/admin/css/app_mobile.css}" rel="stylesheet" media="screen and (max-width: 767px)">
+<link th:href="@{/admin/css/application.css}" rel="stylesheet">
+<title>トップページ | 田中駿吾 業務用アプリケーション</title>
+</head>
+<body>
+<div id="bgblack">
+<header th:fragment="siteHeader">
+<div class="p_infobar_content">
+Amazonプライム感謝祭実施中。セール会場はこちら
+</div>
+	
+<div class="l-header-content">
+
+<div class="logo">
+<a>
+<img src="/image/logo.png">
+</a>
+<span>SuiTus</span>
+</div>
+<nav id="header-navigation">
+	<ul>
+	<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
+	<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
+	</ul>
+</nav>
+</div>
+
+<button class="c-hamburger-btn btn" aria-expanded="false" aria-controls="drawer-nav">
+	<span class="c-hamburger-btn__bars">
+		<span class="c-hamburger-btn__bar"></span>
+		<span class="c-hamburger-btn__bar"></span>
+		<span class="c-hamburger-btn__bar"></span>
+	</span>
+</button>
+	<nav class="sp-menu">
+	<ul>
+		<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
+		<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
+	</ul>
+	</nav>
+</header>
+</div>
+<h1><a href="/index.html" th:href="@{/}">業務管理アプリケーション</a></h1>
+<form th:action="@{/logout}" name="logout" method="POST">
+            <a href="javascript:logout.submit()"><span style="margin-left: 25px;">ログアウト</span></a>
+</form>
+<form id="imageUpload" method="post" th:action="@{/admin/upload}" enctype="multipart/form-data">
+    <label>画像ファイルを選択</label>
+    <input id="imageFile" type="file" name="file">
+    <img id="previewImage" class="previewImage" th:src="${imagefileName}">
+    <button type="submit">アップロード</button>
+	<div th:text="${imageuploadmessage}"></div>
+</form>
+<form id="form" th:action="@{/admin/create}" th:object="${validItem}" method="POST" enctype="multipart/form-data">
+  <div class="container">
+    <div class="head">
+      <h2>商品追加フォーム</h2>
+    </div>
+    <div th:text="${infoMessage}"></div>
+    
+    <div class="parts">
+    <label for="name">商品名</label>
+    <input id="name" type="text" th:field="*{name}" placeholder="商品の名前を入力" />
+    <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    </div>
+    <div class="parts">
+<label for="category-select">カテゴリー:</label>
+<div>
+<select name="categories" id="category-select" th:field="*{category}" >
+  <option value="">--カテゴリーを選択してください--</option>
+  <option value="ボール">ボール</option>
+  <option value="ウェア">ウェア</option>
+  <option value="シューズ">シューズ</option>
+  <option value="トレーニング">トレーニング</option>
+  <option value="キャップ">キャップ</option>
+</select>
+<div class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+</div>
+    </div>
+    <div class="parts">
+    <label for="price">値段</label>
+    <input id="price" type="text" th:field="*{price}" placeholder="値段を入力" />
+    <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    </div>
+    
+    <div class="parts">
+    <label for="quantity">在庫</label>
+    <input id="quantity" type="text" th:field="*{quantity}" placeholder="在庫を入力" />
+    <div class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
+    </div>
+    
+    <div class="parts">
+    <label for="itemid">商品id(連番のため変更不可)</label>
+    <input id="itemid" type="text" th:field="*{itemid}" placeholder="idを入力" readonly></textarea>
+    <div class="text-danger" th:if="${#fields.hasErrors('itemid')}" th:errors="*{itemid}"></div>
+    </div>
+    
+    <div class="parts">
+    <label for="description">商品説明</label> 
+    <textarea id="description" type="text" th:field="*{description}" placeholder="例：シンプルに使えます。"></textarea>
+    <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+    </div>
+    
+    <div class="parts">
+    <label for="info">商品情報</label>
+    <input id="info" type="text" th:field="*{info}" placeholder="重さや対象年齢など" />
+    <div class="text-danger" th:if="${#fields.hasErrors('info')}" th:errors="*{info}"></div>
+    </div>
+    
+    <div class="parts">
+    <label for="period">期限</label>
+    <input id="period" type="text" th:field="*{period}" placeholder="期限がいつまでかを入力" />
+    <div class="text-danger" th:if="${#fields.hasErrors('period')}" th:errors="*{period}"></div>
+    </div>
+    
+	<div class="parts">
+    <label for="imageurl">画像URL(変更不可)</label>
+    <input id="imageurl" type="text" th:field="*{imageurl}" placeholder="最初にアップロードした画像urlを自動入力" readonly/>
+    <div class="text-danger" th:if="${#fields.hasErrors('imageurl')}" th:errors="*{imageurl}"></div>
+    <img id="previewImage2" class="previewImage" th:src="*{imageurl}">
+    </div>
+    
+    <div class="parts">
+    <label for="purchaseurl">購入URL</label>
+    <input id="purchaseurl" type="text" th:field="*{purchaseurl}" placeholder="アフィリエイトidを含めないため、絶対にシンプルなurlで入力 https://www.amazon.co.jp/" value="https://www.amazon.co.jp/"/>
+    <div class="text-danger" th:if="${#fields.hasErrors('purchaseurl')}" th:errors="*{purchaseurl}"></div>
+    </div>
+    <div class="parts button">
+    <button name="createbutton" id="submit" type="submit">
+      追加
+    </button>
+    <button name="updatebutton" id="submit" type="submit">
+      更新
+    </button>
+    </div>
+    <div class="message">
+    <div class="duplication" th:text="${duplication}"></div>
+    <div class="success" th:text="${message}"></div>
+    </div>
+  </div>
+</form>
+
+<ul class="list-group">
+        <li class="list-group-item"><a href="/orderlist.html" th:href="@{/orders}">注文リスト一覧</a></li>
+        <li sec:authorize="hasRole('ADMIN')" class="list-group-item"><a href="/userlist.html" th:href="@{/users}">ユーザー一覧</a></li>
+</ul>
+
+<form name="myform" id="myform" th:action="@{/admin/orderBycategory}" th:method="get">
+<select name="category" id="category-select" th:value="${category}">
+  <option value="">---指定したカテゴリーの昇順で並び替え---</option>
+  <option value="ボール">ボール</option>
+  <option value="ウェア">ウェア</option>
+  <option value="シューズ">シューズ</option>
+  <option value="トレーニング">トレーニング</option>
+  <option value="キャップ">キャップ</option>
+</select>
+</form>
+<form id="form" th:action="@{/admin/showAll}" th:method="get">
+<button>全て表示</button>
+</form>
+
+<div class="products flex">
+<div class="products" th:each="item: ${items}">
+<div class="product">
+<a>
+<span class="productImage">
+<img th:src="${item.imageurl}">
+</span>
+<span class="contents" th:text="${item.name}"></span>
+<span class="contents text">カテゴリー</span>
+<span class="contents category" th:text="${item.category}"></span>
+<span th:text="${item.description}"></span><br>
+<span class="price" th:text="${item.price}"></span><small>円(税込)</small>
+<br>
+<button>詳細 ↠</button>
+</a>
+<form th:action="@{/admin/{id}(id=${item.id})}" th:method="delete">
+   <input name="filename" type="hidden" th:value="${item.imageurl}">
+   <input name="submit" onclick="return confirm('本当に削除しますか？');" type="submit" value="削除">
+</form>
+</div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script th:src="@{/admin/js/application.js}"></script>
+<script th:src="@{/admin/js/top.js}"></script>
+
+</body>
+</html>

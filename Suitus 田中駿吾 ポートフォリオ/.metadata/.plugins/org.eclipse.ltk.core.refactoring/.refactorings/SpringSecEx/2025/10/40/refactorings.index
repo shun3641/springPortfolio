@@ -1,0 +1,13 @@
+1759459141640	Rename type 'Users'
+1759459784008	Rename resource 'items.html'
+1759461807024	Rename type 'UsersEntity'
+1759462192024	Move '403.html' to 'view.user'
+1759462193725	Move 'item.html' to 'view.user'
+1759462205194	Rename resource 'item.html'
+1759462384333	Rename resource 'view.user'
+1759462473593	Move 2 resources to 'templates'
+1759462477112	Delete element
+1759464937288	Delete element
+1759467719445	Delete element
+1759473958071	Rename resource '404.html'
+1759474076230	Move '403.html' to 'error'

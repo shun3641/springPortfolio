@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/header.css}" rel="stylesheet">
+<link th:href="@{/css/product.css}" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:replace="~{base :: siteHeader}"></div>
+<nav id="header-navigation">
+	<ul class="black">
+<!-- カテゴリー名を変更するときはparamの値とaタグのテキストを同一に変更すればよい
+	postgresql Itemsデータベースのフィールド名も書き換えておく -->
+	<li><a th:href="@{/index}">ホーム</a></li>
+	<li><a th:href="@{/items/ball(param='シューズ')}">商品一覧</a></li>
+	<li><a th:href="@{/items/training(param='トレーニング')}">トレーニング</a></li>
+	<li><a th:href="@{/items/cap(param='キャップ')}">キャップ</a></li>
+	</ul>
+</nav>
+        <div class="detail flex" th:each="item : ${items}">
+            
+            <div class="section">
+            <img th:src="${item.imageurl}">
+            </div>
+            
+            <div class="section">
+            <h1 id="product-title" th:text="${item.name}">Taro</h1>
+            <div class="description" th:text="${item.description}"></div>
+            <div>
+            <span class="price" th:text="${item.price}"></span>
+            <span class="yen">円</span>
+            <div>(税込価格)</div>
+            </div>
+            <div class="purchasebutton">
+                <a>購入</a>
+            </div>
+            </div>
+        </div>
+</body>
+</html>

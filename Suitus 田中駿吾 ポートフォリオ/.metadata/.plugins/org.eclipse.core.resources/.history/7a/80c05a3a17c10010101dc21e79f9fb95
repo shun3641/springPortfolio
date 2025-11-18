@@ -1,0 +1,294 @@
+* {
+	margin: 0;
+	padding: 0;	
+}
+
+body {
+	box-sizing: border-box;
+}
+
+h1 {
+	margin-top: 100px;
+	margin-left: 20px;
+}
+
+h1 > a {
+	color: #111;
+	text-decoration: none;
+}
+
+#bgblack .l-header-content {
+	background-color: black;
+	padding: 10px;
+	margin-top: -20px;
+	justify-content: center;
+	width: 100%;
+}
+
+#header-navigation ul {
+	display: flex;
+	list-style: none;
+	gap: 24px;
+	padding-top: 5px;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+ul.list-group {
+	padding: 0;	
+}
+
+.list-group-item {
+	list-style-type: none;
+	font-size: 1.3rem;
+	padding: 20px;
+	border-top: 0.5px solid lightgray;
+	border-bottom:0.5px solid lightgray;
+}
+.logout {
+	font-size: 18px;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 20px;
+}
+
+.logout span {
+	background-color: black;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+
+.list-group-item a {
+	background-color: #1569e5;
+	border-radius: 5px;
+	color: white;
+	padding: 5px 10px;
+}
+
+.price {
+	font-size: 1.5em;
+}
+
+.container {
+  max-width:1200px;
+  margin: 35px auto;
+  text-align: left;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+  background-color:#FAFAFA;
+  padding: 20px;
+}
+
+input,textarea {
+  display: block;
+  padding: 15px;
+  width: 100%;
+  margin: 10px 0;	
+}
+h2 {
+	padding: 20px;
+}
+.parts {
+  padding:10px;
+}
+
+.createsuccess {
+  font-size: 1.2rem;	
+}
+
+.head {
+  -webkit-border-radius:6px 6px 0px 0px;
+  -moz-border-radius:6px 6px 0px 0px;
+  border-radius:6px 6px 0px 0px;
+  background-color:#2ABCA7;
+  color:#FAFAFA;
+  padding-left: 10px;
+}
+h2 {
+  text-align:left;
+  padding:25px 0 25px 0px;
+  font-size: 1.4em;
+  color: white;
+}
+
+textarea {
+  height:100px;
+  margin-bottom:10px;
+  resize: none;
+}
+.text-danger {
+	color: red;
+}
+input, textarea {
+  font-size: 1em;
+  font-family: 'Source Sans Pro',arial,sans-serif;
+  border: 1px solid #cecece;
+  background: #d7d7d7;
+  color:#FAFAFA;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+::-webkit-input-placeholder {
+   color: #FAFAFA;
+}
+:-moz-placeholder {
+   color: #FAFAFA;  
+}
+::-moz-placeholder {
+   color: #FAFAFA; 
+}
+:-ms-input-placeholder {  
+   color: #FAFAFA;  
+}
+input[type="submit"],button {
+  width: 50%;
+  margin-top:30px;
+  margin-bottom:25px;
+  background-color:#2ABCA7;
+  padding: 12px 0;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #2ABCA7;
+  -webkit-transition: .5s;
+  transition: .5s;
+  display: inline-block;
+  cursor: pointer;
+  color:#fff;
+}
+
+/* media queries */
+@media (max-width: 700px) {
+  label.error {
+    width: 90%;
+  }
+
+  body {
+  padding-top:10px;
+  }  
+}
+
+.products.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.parts.button {
+	display: flex;
+	justify-content: center;
+}
+
+.parts button {
+	display: block;
+	font-size: 0.85rem;
+	width: 40%;
+	
+}
+
+button[name="updatebutton"] {
+	margin-left: 40px;
+	background-color: #2a76bc;
+}
+
+button[name="updatebutton"]:hover {
+	background-color: #2a76bcbd;
+}
+
+button[name="createbutton"]:hover {
+	background-color: #2abca7bd;
+}
+
+#category-select {
+	height: 40px;
+	font-size: 1.0rem;
+	margin-top: 10px;
+	padding-left: 15px;
+}
+
+.message {
+	padding-left: 10px;
+}
+
+.contents.text {
+	font-size: 1rem;
+	margin-top: 15px;	
+	color: #242424;
+}
+
+.contents.category {
+	margin-bottom: 10px;
+}
+
+.products {
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+	margin-top: 30px;
+}
+
+.productImage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	background-color: rgba(0,0,0,0.15);
+}
+
+.productImage img {
+	position: relative;
+	top: 5px;
+	height: 200px;
+}
+
+.contents {
+	display: block;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	font-size: 24px;
+}
+
+.price {
+	font-size: 1.4rem;
+}
+
+.product button {
+	margin-top: 18px;
+	margin-bottom: 18px;
+	padding: 0;
+	font-size: 18px;
+	width: 100px;
+}
+
+#imageUpload {
+	max-width: 1200px;
+    margin: 35px auto;
+}
+
+.c-hamburger-btn.btn {
+	top: 25px;
+    padding: 10px 25px;
+    margin: 0;	
+}
+
+.previewImage {
+	width: 14%;
+}
+
+.products {
+	border-radius: 18px;
+	padding:18px;
+	overflow:hidden;
+	border:1px solid rgba(60, 60, 60,0.2);
+}
+
+#previewImage {
+	display: none;
+}

@@ -1,0 +1,258 @@
+package com.example.demo.controller;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.demo.model.Items;
+import com.example.demo.model.Users;
+import com.example.demo.repository.ItemRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.ItemService;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+import lombok.Data;
+
+
+@Controller
+@RequestMapping("/admin")
+public class ItemContoroller {
+	
+	@Autowired
+    private EntityManager entityManager;
+	
+	@Autowired
+	ItemRepository itemRepository;
+	@Autowired
+	ItemService itemService;
+	
+	@Autowired
+	UserRepository userRepository;
+	//Configクラスでスプリングコンテナに
+	//bean定義したインスタンスを返すメソッドで依存性を注入
+	@Autowired
+	private Items myItems() {
+		return new Items();
+	}
+	 
+	 @Value("${file.upload-dir}")
+	 private String uploadDir;
+	
+	public static final String bindingResult = "org.springframework.validation.BindingResult.validItem";
+	
+	@GetMapping("/application")
+	public String application(Model model,
+			@ModelAttribute("duplication") String duplication,
+			@ModelAttribute Items items,
+			@ModelAttribute(bindingResult) BindingResult bindingResults,
+			@ModelAttribute("validItem") Items validItem,
+			@ModelAttribute("ExistItem") Items ExistItem,
+			@ModelAttribute("imageuploadmessage") String imageuploadmessage,
+			@ModelAttribute("imagefileName") String imagefileName) {
+		  model.addAttribute("imageuploadmessage", imageuploadmessage);
+		  model.addAttribute("duplication", duplication);
+		  model.addAttribute(bindingResult, bindingResults);
+		  model.addAttribute("validItem",validItem);
+		  validItem.setImageurl(imagefileName);
+		  
+		  //itemidのmax値+1をフォームで受け取る
+		  CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+	        CriteriaQuery<Integer> query = cb.createQuery(Integer.class);
+	        Root<Items> root = query.from(Items.class);
+	        query.select(cb.max(root.get("itemid")));
+	        Integer maxItemid = entityManager.createQuery(query).getSingleResult();
+	        validItem.setItemid(maxItemid+1);
+		  
+	        if(ExistItem.getId()!=null) {		
+			  ExistItem.setName(validItem.getName());
+			  ExistItem.setPrice(validItem.getPrice());
+			  ExistItem.setQuantity(validItem.getQuantity());
+			  ExistItem.setDescription(validItem.getDescription());
+			  ExistItem.setInfo(validItem.getInfo());
+			  ExistItem.setImageurl(validItem.getImageurl());
+			  System.out.println("下記の商品を更新しました。" + ExistItem);
+			  itemRepository.save(ExistItem);		 
+		  }
+		  model.addAttribute("items",itemService.showItemAll());
+
+		  return "admin/application";
+	}
+	@PostMapping(value="/create",params="createbutton")
+	public String create(RedirectAttributes redirectAttributes,
+			  @ModelAttribute @Validated Items validItem,
+			 BindingResult bindingResults,Model model) throws IOException {
+
+		  if(!itemRepository.findByName(validItem.getName()).isEmpty()||
+				  !itemRepository.findByItemid(validItem.getItemid()).isEmpty()) {
+			  redirectAttributes.addFlashAttribute
+			  (bindingResult, 
+			  bindingResults);
+			  redirectAttributes.addFlashAttribute("validItem", validItem);
+			  redirectAttributes.addFlashAttribute("duplication", "itemidまたは商品名の重複があります。");
+			  return "redirect:/admin/application";
+		  }
+		  
+		  if(bindingResults.hasErrors()) { // エラーがあった場合、データを保持したまま元のフォーム画面に戻る
+			  redirectAttributes.addFlashAttribute
+			  (bindingResult, 
+			  bindingResults);
+			  redirectAttributes.addFlashAttribute("validItem", validItem);
+			  return "redirect:/admin/application";
+			  }
+		//Items(id=null, name=, price=null, quantity=null, item_id=null, description=, info=, imageurl=)
+		
+		/*
+		 * if(itemInstance.getName()!="" && itemInstance.getPrice()!=null &&
+		 * itemInstance.getQuantity()!=null && itemInstance.getDescription()!="" &&
+		 * itemInstance.getInfo()!="" && itemInstance.getImageurl()!="")
+		 */
+		 
+		{itemRepository.save(validItem);}
+		redirectAttributes.addFlashAttribute("message", "商品を追加しました。");
+		return "redirect:/admin/application";
+		
+		
+	}
+	
+	@PostMapping(value="/create",params="updatebutton")
+	public String updateItem(
+			Model model, RedirectAttributes redirectAttributes,
+			  @ModelAttribute @Validated Items validItem,
+			 BindingResult bindingResults) throws IOException {
+		//すでにデータベースに存在する商品の行リスト
+		List<Items> ExistItem = itemRepository.findByName(validItem.getName());
+
+		redirectAttributes.addFlashAttribute("ExistItem", ExistItem);
+		redirectAttributes.addFlashAttribute (bindingResult,bindingResults); 
+		redirectAttributes.addFlashAttribute("validItem",validItem);
+        return "redirect:/admin/application";
+	
+	}
+	
+	@DeleteMapping("/{id}")
+    public String deleteItem(@PathVariable Integer id,
+    		@RequestParam String filename) {
+		String filepath = filename.substring(filename.lastIndexOf('/') + 1);
+		System.out.println(filepath);
+		itemRepository.deleteById(id);
+		Path path = Paths.get(uploadDir,filepath);
+		try {
+			Files.delete(path);
+			Thread.sleep(3000);
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("商品を削除しました。");
+		 return "redirect:/admin/application";// 一覧画面にリダイレクト
+    }
+	
+	 @PostMapping("/upload")
+	 public String handleFileUpload(RedirectAttributes redirectAttributes,@RequestParam("file") MultipartFile file) throws IOException {
+		
+		Path path = Paths.get(uploadDir, file.getOriginalFilename());
+		// 2.　正規表現パターンを用意する 
+//	    String regex_Alphabet = "^[A-Za-z]+$" ; // アルファベットのみ
+	    String regex_AlphaNum = "^[A-Za-z0-9._-]+$"; // 半角英数字+.のみ 
+	    //受け取ったファイル名が全て半角英数字._-になっているか確認
+	    Boolean checkPattern = checkLogic(regex_AlphaNum,file.getOriginalFilename());
+	    if(!checkPattern) {
+	    	redirectAttributes.addFlashAttribute("imageuploadmessage", "エラー：画像名は半角英数字にしてください。");
+	    	return "redirect:/admin/application";
+	    }
+	    Files.createDirectories(path.getParent());
+      //画像ファイルのバイトデータを抽出
+        Files.write(path, file.getBytes());
+        try {
+            Thread.sleep(3000); // ミリ秒数は調整する
+        } catch (InterruptedException e) {
+            System.out.println("待ち時間中に割り込みが発生しました。");
+        }
+        redirectAttributes.addFlashAttribute("imageuploadmessage", "画像ファイルのアップロードが完了しました。");
+        redirectAttributes.addFlashAttribute("imagefileName", "/uploads/" + file.getOriginalFilename());
+        
+        //uploadsフォルダ内の画像ファイルを配列に格納する
+        
+        return "redirect:/admin/application";
+    }
+	 
+	 public static boolean checkLogic(String regex, String target) {
+		    boolean result = true;
+		    System.out.println(target);
+		    if( target == null || target.isEmpty() ) return false ;
+		    // 3. 引数に指定した正規表現regexがtargetにマッチするか確認する
+		    Pattern p1 = Pattern.compile(regex); // 正規表現パターンの読み込み
+		    Matcher m1 = p1.matcher(target); // パターンと検査対象文字列の照合
+		    result = m1.matches(); // 照合結果をtrueかfalseで取得
+		    return result;
+		  }
+	 
+			 @GetMapping("/orderBycategory") 
+			 public String orderBycategoryAsc(Model model,
+			 @RequestParam("category") String category,
+			 @ModelAttribute("validItem") Items validItem) { 
+				 System.out.println(category);
+				 List<Items> Ordereditems = itemRepository.findByCategoryOrderByNameAsc(category);
+				 System.out.println(itemRepository.findByCategoryOrderByNameAsc(category));
+				 model.addAttribute("items",Ordereditems);
+				 model.addAttribute("category", category);
+				 return "admin/application";
+			 }
+			 
+			 @GetMapping("/showAll")
+			 public String showAll(Model model,
+					 @ModelAttribute("validItem") Items validItem) {
+				 List<Items> items = itemRepository.findAll();
+				 model.addAttribute("items", items);
+				 return "admin/application";
+			 }
+			 
+			 @GetMapping("/orders")
+				public String orders(Model model) {
+					return "admin/orders";
+				}
+			 @GetMapping("/userlist")
+				public String userlist(Model model) {
+				 List<Users> users = userRepository.findAll();
+				 model.addAttribute("users", users);
+				 return "admin/userlist";
+				}
+
+			    public Users getProductCount() {
+			        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+			        CriteriaQuery<Users> query = cb.createQuery(Users.class);
+			        Root<Users> root = query.from(Users.class);
+
+			        query.select(root).orderBy(cb.asc(root.get("id")));
+			     // 5. TypedQueryの作成
+			        TypedQuery<Users> typedQuery = entityManager.createQuery(query);
+
+			        // 6. クエリの実行と結果リストの取得
+			        List<Users> resultList = typedQuery.getResultList();
+			        return resultList;
+			    }
+
+}

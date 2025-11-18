@@ -1,0 +1,45 @@
+1759804512959	Move 'fachry-zella-devandra-aocSTivG0yo-unsplash.jpg' to 'static'
+1759804569998	Move 'fachry-zella-devandra-aocSTivG0yo-unsplash.jpg' to 'images'
+1759804744870	Move 'fachry-zella-devandra-aocSTivG0yo-unsplash.jpg' to 'static'
+1759804747480	Delete element
+1759804756175	Rename resource 'fachry-zella-devandra-aocSTivG0yo-unsplash.jpg'
+1759811057383	Move 'public-domain-vectors-_3m9ijhIqwg-unsplash.png' to 'static'
+1759811063623	Rename resource 'public-domain-vectors-_3m9ijhIqwg-unsplash.png'
+1759811255551	Delete element
+1759811260157	Rename resource 'public-domain-vectors-_3m9ijhIqwg-unsplash-removebg-preview.png'
+1759891070546	Move 'top.css' to 'css'
+1759891074686	Move 'mobile.css' to 'css'
+1759896601634	Copy file
+1759897740624	Delete element
+1759898023119	Delete element
+1759898509132	Copy file
+1759898598956	Delete element
+1759901239193	Copy file
+1759905500205	Copy file
+1759905521074	Copy file
+1759905528964	Copy file
+1759975081949	Rename resource 'skiking-photos-d-f7hjdjNjw-unsplash.jpg'
+1759975535893	Delete element
+1759975541158	Rename resource 'hoseung-han-hTlKLqlwvs8-unsplash.jpg'
+1759976101308	Rename resource 'hoseung-han-hTlKLqlwvs8-unsplash-removebg-preview.png'
+1759976108828	Rename resource 'bernd-dittrich-MJeKTe15DOs-unsplash.jpg'
+1759976175643	Delete element
+1759976211641	Rename resource 'graund.jpg'
+1759977930306	Rename resource 'item1.png'
+1759977954218	Rename resource 'ball.png'
+1759977960536	Rename resource 'item5.png'
+1759985763978	Rename type 'ShoppingCartApplication'
+1759985793228	Rename type 'SuitustApplication'
+1759986984410	Rename type 'HomeController'
+1760061178420	Delete element
+1760062148049	Delete element
+1760062154098	Delete element
+1760069832441	Encapsulate field 'authority, ...'
+1760070034921	Encapsulate field 'authority, ...'
+1760070282679	Encapsulate field 'password, ...'
+1760072413781	Delete element
+1760072428536	Rename type 'UserPrinciple'
+1760072582861	Encapsulate field 'username, ...'
+1760073056236	Rename type 'User'
+1760073198993	Encapsulate field 'username, ...'
+1760073947125	Encapsulate field 'authority, ...'

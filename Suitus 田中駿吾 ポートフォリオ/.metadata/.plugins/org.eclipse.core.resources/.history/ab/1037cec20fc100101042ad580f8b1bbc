@@ -1,0 +1,45 @@
+$(document).ready(function() {
+	
+	$("#previewImage").attr("src",$("#previewImage2").attr('src'))
+	.css("display", "block");
+    $("#imageFile").on("change", function(event) {
+        var file = event.target.files[0]; // 選択されたファイルを取得
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $("#previewImage")
+                .attr("src", e.target.result) // 画像のURLをimgタグのsrcに設定
+                .css("display", "block"); // 画像を表示
+        }
+
+        reader.readAsDataURL(file); // ファイルをURL形式に読み込む
+    });
+	
+	var form = document.forms.myform;
+		form.category.addEventListener('change', function() {
+			console.log('状態が変化しました！');
+
+			  	  
+			      //submit()でフォームの内容を送信
+			      document.myform.submit();
+		});
+		
+		//現在のurlの最後の/以降の値を取得
+		let pathName = $(location).attr('pathname');
+		let lastSlashIndex = pathName.lastIndexOf('/');
+		
+		let lastSegment = pathName.substring(lastSlashIndex + 1);
+		let hash = $(location).attr('hash');
+		console.log(!hash);
+		
+		//リロード時#myformが連続追記される不具合の修正
+		// orderBycategoryのカタチと#以降の値が存在する場合*/
+		if(lastSegment == "orderBycategory"　|| 
+			lastSegment == "showAll" &&
+			!hash 
+		){
+		//現url情報の末端に#myformを追加
+		window.location.href =window.location.href + "#myform";
+		
+	}
+});

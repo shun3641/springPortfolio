@@ -1,0 +1,23 @@
+
+$(function(){
+  $(".btn").on("click", function(){
+	$(".btn").toggleClass("active");
+    $(".sp-menu").toggleClass("open");
+  });
+  
+/*  sp-menuの現urlに一致するaタグにactiveクラス(薄い背景)を付与　*/  
+　　
+　　let pathName = $(location).attr('pathname');
+
+  console.log(pathName);
+	$.each($(".sp-menu a"), function(i, a){
+/*	aの中身<a href="/ball" class="active">ボール</a>　*/		console.log(a.getAttribute("href"));
+			if(a.getAttribute("href")==pathName) {
+					/* aをオブジェクト化 */
+					$(a).addClass("active");
+					
+				  };
+	      })
+		  
+	var btn = document.getElementById('btn');
+  })

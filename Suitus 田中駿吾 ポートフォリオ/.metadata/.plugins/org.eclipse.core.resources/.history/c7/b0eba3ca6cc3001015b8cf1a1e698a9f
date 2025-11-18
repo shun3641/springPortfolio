@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/css/product.css}" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>購入ページ</h1>
+        <div class="detail" th:each="item : ${items}">
+            <div><img th:src="${item.imageurl}"></div>
+            <div>
+            <h1 id="product-title" th:text="${item.name}">Taro</h1>
+            <div class="description" th:text="${item.description}"></div>
+            <div>
+            <span class="price" th:text="${item.price}"></span>
+            <span class="yen">円</span>
+            </div>
+            <div>
+                <a>購入</a>
+            </div>
+            </div>
+        </div>
+</body>
+</html>
