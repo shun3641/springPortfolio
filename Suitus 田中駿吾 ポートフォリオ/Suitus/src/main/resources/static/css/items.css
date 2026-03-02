@@ -1,0 +1,213 @@
+:root {
+            --main-blue: #007bff;
+            --dark: #121212;
+            --gray-light: #f4f7f6;
+            --transition: all 0.3s ease;
+             --primary-color: #007bff;
+            --dark-color: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --text-main: #333;
+            --border-color: #ddd;
+        }
+        
+        body {
+            font-family: 'Inter', 'Hiragino Sans', sans-serif;
+            margin: 0;
+            background-color: var(--gray-light);
+            color: var(--dark);
+            box-sizing: border-box;
+        }
+
+
+        /* ヒーローバナー */
+        .hero-banner {
+            height: 350px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .hero-banner h1 { font-size: 3.5rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* カウント表示 */
+        .status-bar {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .count-badge {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+        }
+
+        /* 商品グリッド */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* 商品カード */
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        .image-box {
+            width: 100%;
+            height: 240px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            overflow: hidden;
+            position: relative;
+        }
+        .image-box img {
+            width: 80%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        .product-card:hover .image-box img { transform: scale(1.1); }
+
+        .card-body { padding: 20px; flex-grow: 1; }
+        .card-category { font-size: 0.75rem; color: var(--main-blue); font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px 0; }
+        .card-price { font-size: 1.2rem; font-weight: 600; color: #333; }
+        
+        /* 在庫・状態バッジ */
+        .stock-info {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #666;
+        }
+        .out-of-stock {
+            color: #e44d26;
+            font-weight: bold;
+        }
+        
+        .about-section {
+        background-color: #fff;
+        padding: 80px 0;
+        border-top: 1px solid #eee;
+    }
+
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .about-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        color: var(--dark-gray);
+        position: relative;
+    }
+
+    .about-title::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 4px;
+        background: var(--main-blue);
+        margin-top: 10px;
+    }
+
+    .about-subtitle {
+        font-size: 1.2rem;
+        color: var(--main-blue);
+        font-weight: bold;
+        margin: 20px 0 30px;
+    }
+
+    .mission-box {
+        background: var(--light-bg);
+        padding: 25px;
+        border-left: 5px solid var(--main-blue);
+        margin-bottom: 40px;
+    }
+
+    .mission-box h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+    }
+
+    /* 会社概要テーブル形式 */
+    .company-info-table {
+        border-top: 1px solid #ddd;
+    }
+
+    .table-row {
+        display: flex;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+    }
+
+    .table-row .label {
+        width: 120px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .table-row .value {
+        flex: 1;
+        color: #333;
+    }
+
+    /* 画像エリア */
+    .about-image img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 20px 20px 0px rgba(0, 123, 255, 0.1); /* 青い影をデザインアクセントに */
+    }
+
+    /* レスポンシブ対応 (スマホで縦並び) */
+    @media (max-width: 768px) {
+        .about-container {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .about-image {
+            order: -1; /* スマホでは画像を先に見せる */
+        }
+        .about-title {
+            font-size: 2rem;
+        }
+    }
+    .category-chips a{
+    	    color: #666;
+    }

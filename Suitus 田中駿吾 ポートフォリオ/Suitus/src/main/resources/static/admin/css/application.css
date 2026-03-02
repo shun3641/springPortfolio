@@ -84,7 +84,7 @@ input,textarea {
   display: block;
   padding: 15px;
   width: 100%;
-  margin: 10px 0;	
+  margin: 10px 0;
 }
 h2 {
 	padding: 20px;
@@ -125,7 +125,7 @@ input, textarea {
   font-family: 'Source Sans Pro',arial,sans-serif;
   border: 1px solid #cecece;
   background: #d7d7d7;
-  color:#FAFAFA;
+  color: #666464;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -298,7 +298,6 @@ button[name="createbutton"]:hover {
 	margin: 0 auto;
 }
 
-/* ---ユーザーリスト---*/
 table {
   border-collapse: collapse;
   border: 2px solid rgb(140 140 140);
@@ -306,7 +305,7 @@ table {
   font-size: 0.8rem;
   letter-spacing: 1px;
   width: 80%;
-  margin: 0 auto;
+  margin: 10px auto 30px auto;
 }
 
 caption {
@@ -340,4 +339,59 @@ tfoot th {
 
 tfoot td {
   font-weight: bold;
+}
+
+/* 譖ｴ譁ｰ繝輔か繝ｼ繝 */
+.imageurl {
+	height: 50px;
+}
+
+.inputForm,#imageUpload {
+	margin: 15px auto;
+	width: 80%;
+}
+
+#inputId {
+	color: #222 !important;
+}
+
+
+#formWrapper {
+	display: none;
+}
+
+#formWrapper.show {
+	display: block;
+}
+.updatebutton {
+	margin-right: 50px;
+	margin-left: auto;
+	padding-top: 20px;
+	font-size: 18px;
+}
+
+.restoreHeading {
+	width: 80%;
+	margin: 70px auto 0 auto;
+}
+
+.restorebutton {
+	width: 80px;
+}
+
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance:textfield;
+}
+
+.parts-wrapper {
+	display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.parts-wrapper .parts {
+	width: 40%;
 }

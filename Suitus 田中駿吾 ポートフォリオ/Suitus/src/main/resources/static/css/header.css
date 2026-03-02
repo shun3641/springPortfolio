@@ -1,120 +1,49 @@
 @charset "UTF-8";
 
+
 :root {
 	--font-family-ja: Roboto,"Noto Sans JP",sans-serif;
 }
-
-* {
-	margin: 0;
-	padding: 0;	
-}
-
 body {
 	margin: 0;
 	box-sizing: border-box;
 }
+/* ヘッダー */
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
+        .logo { font-size: 1.5rem; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .logo a {color: white;text-decoration: none;}
+        nav ul { list-style: none; display: flex; gap: 20px; margin: 0; flex-wrap: wrap;
+        	align-items: center;margin-top: 5px;
+        }
+        nav a { color: white; text-decoration: none; font-size: 0.9rem; }
 
-.p_infobar_content {
-	font-family: var(--font-family-ja);
-	letter-spacing: 0.8px;
-	background-color: #0064f8;
-	text-align: center;
-	padding: 8px;
-	margin: 0;
-	font-size: 13px;
-    font-weight: 500;
-    color: #ffffff;
-}
-
-.p_infobar_content::after {
-	content: '➔';
-	display: inline-block;
-	color: white;
-	font-size: 12px;
-	padding-left: 5px;
-}
-
-.l-header-content{
-	width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #000000;
-    border-bottom: 1.5px solid #404040;
-}
-
-
-.l-header-content > div {
-	display: flex;
-	align-items: center;
-	padding-top: 8px;
-	gap: 10px;
-	color: white;
-}
-
-.logo span {
-	font-size: 17px;
-	position: relative;
-	top: -3px;
-}
-
-img[src="/image/logo.png"]{
-	height: 60px;
-	width: 60px;
-}
-
-#header-navigation ul {
-	display: flex;
-	list-style: none;
-	gap: 24px;
-	padding-top: 5px;
-	margin-top: 20px;
-}
-
-#header-navigation ul a {
-	font-size: 15px;
-	text-decoration: none;
-	color: white;
-	line-height: 1.5;
-	letter-spacing: 0.8px;
-	font-weight: normal !important;
-	
-	&:hover {
-		text-decoration: underline;
-		text-underline-offset: .3rem;
-	}
-}
-
-.c-hamburger-btn {
-	display: none;
-}
-.sp-menu {
-	visibility: hidden;
-	width: 0;
-	height: 0;
-}
-.sp-menu ul {
-	margin-top: 0;	
-}
-.topImage {
-	height: calc(100vh - 30px);
-}
-
-.topImage img {
-	display: block;
-	height: 100%;
-	width :100%;
-	overflow: hidden;
-}
-
-.l-header-content.black {
-	background-color: black;
-}
-
-.loginbtn a{
-	display: inline-block;
-	background: #0064f8;
-	padding: 10px 15px;
-	border-radius: 5px;
-	margin-top: -8px;
-}
+        .btn-login {
+            background-color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        
+        a[href="/login"] {
+        	padding: 0 15px;
+        	height: 40px;
+        	display: flex;
+        	align-items: center;
+        }
+        input[value="ログアウト"] {
+        	padding: 0 15px;
+        	height: 40px;
+        	cursor: pointer;
+        	border: none;
+        	border-radius: 4px;
+        	font-size: 14px;
+        	display: block;
+        }

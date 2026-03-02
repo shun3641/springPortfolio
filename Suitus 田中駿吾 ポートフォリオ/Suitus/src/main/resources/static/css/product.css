@@ -129,13 +129,30 @@ img[src="useball.png"] {
 }
 
 /* 購入ページ */
+
+.menu li button {
+	background-color: white;
+	border: none;
+	cursor: pointer;
+}
+.menu li button:hover {
+	text-decoration: underline 1.2px solid black;
+    text-underline-offset: .3rem;
+}
+
 .detail {
 	display: flex;
 	justify-content: center;
     margin-top: 30px;
 	gap: 20px;
+}
+.detail .section {
+	width: 200px;
+}
+.detail .section img {
 	width: 100%;
 }
+
 
 .description {
 	margin-top: 20px;
@@ -158,10 +175,40 @@ img[src="useball.png"] {
     border-width: 1px;
     border-color: transparent;
 }
+
+.purchasebutton a {
+	color: black;
+	text-decoration: none;
+}
 #header-navigation.black ul {
 	justify-content: center;
 }
 
 #header-navigation.black ul a {
 	color: black;
+}
+.backbutton {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.backbutton button {
+	font-size: 0.9rem;
+	background-color: white;
+	border: none;
+	cursor: pointer;
+	line-height: 2;
+}
+
+.purchaseForm label {
+	display: inline-block;
+    width: 60px;
+    margin-bottom: 8px;
+}
+
+.count {
+	appearance: none;
+}
+
+.text-danger {
+	color:red;
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/footer.css}" rel="stylesheet">
+    <link th:href="@{/css/itemView.css}" rel="stylesheet">
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <title>購入画面 - SuiTus</title>
+</head>
+<body>
+<header>
+    <div class="logo"><a th:href="@{/index}">SuiTus</a></div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/items(category='ボール')}" 
+           class="chip" 
+           th:classappend="${selectedCategory == 'ボール'} ? 'active' : ''">ボール</a></li>
+            <li><a th:href="@{/items(category='シューズ')}" 
+           class="chip" 
+           th:classappend="${selectedCategory == 'シューズ'} ? 'active' : ''">シューズ</a></li>
+            <li><a th:href="@{/items(category='トレーニング')}" 
+           class="chip" 
+           th:classappend="${selectedCategory == 'トレーニング'} ? 'active' : ''">トレーニング</a></li>
+            <li><a th:href="@{/items(category='キャップ')}" 
+           class="chip" 
+           th:classappend="${selectedCategory == 'キャップ'} ? 'active' : ''">キャップ</a></li>
+            <li><a th:href="@{/login}" class="btn-login">ログイン</a></li>
+            <li class="logoutbtn" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="ログアウト"/>
+			</form>
+			</li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="product-image">
+        <img th:src="${item.imageurl}" th:alt="${item.name}">
+    </div>
+
+    <div class="product-info">
+        <h1 th:text="${item.name}">商品名</h1>
+        <p th:text="${item.info}">商品情報</p>
+        <p th:text="${item.description}">商品情報</p>
+        
+        <div id="priceDisplay" class="price" th:text="${#numbers.formatInteger(item.price, 1, 'COMMA') + '円'}">1,000円</div>
+        <div class="tax">(税込価格)</div>
+
+        <form th:action="@{/items/purchase/{id}(id=${item.id})}" th:object="${purchase}" method="post" class="order-form"
+        id="purchaseForm">
+
+            <div class="form-group">
+                <label>お届け先住所</label>
+                <input id="inputAddress" type="text" th:field="*{address}" placeholder="東京都渋谷区...">
+                <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" style="color:red;"></p>
+            </div>
+
+            <div class="form-group">
+                <label>個数 (1-10)</label>
+                <input type="number" th:field="*{quantity}" id="quantityInput" min="1" max="10">
+                <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" style="color:red;"></p>
+            </div>
+            
+            <div class="total-area">
+                合計: <span id="totalDisplay" th:text="${#numbers.formatInteger(purchase.price, 1, 'COMMA')}"></span>円
+            	
+            </div>
+
+            <div id="buyButton" class="btn-submit buy-btn" th:if="${currentQuantity}!=0">今すぐ購入する</div>
+            <div style="color: blue;margin-top: 5px;">
+            在庫
+            <span th:text="${currentQuantity}"></span>個 <span th:if="${currentQuantity}==0">品切れ</span></div>
+            <div th:text="${OutofStock}" style="color: red;margin-top: 5px;"></div>
+            <!-- ===== 購入確認モーダル ===== -->
+  <div id="confirmModal" class="modal">
+    <div class="modal-content">
+      <h2>購入内容の確認</h2>
+      <p><strong>商品名：</strong><span th:text="${item.name}"></span></p>
+      <p><strong>個数：</strong><span id="confirmQuantity"></span> 個</p>
+      <p><strong>合計金額：</strong><span id="confirmTotal"></span> 円</p>
+      <p><strong>お届け先：</strong><span id="confirmAddress"></span>
+      <span id="addressNoneWarn" class="warn"></span></p>
+		
+      <div class="modal-actions">
+        <button type="button" id="cancelButton" class="btn cancel">キャンセル</button>
+
+        	<button type="submit" id="decideButton" class="btn confirm">
+        	購入確定</button>
+        
+      </div>
+    </div>
+        </div>
+        </form>
+
+        <div class="back-link-container">
+    <a th:href="@{/items}" class="btn-back">
+        <span class="arrow">←</span> 商品一覧に戻る
+    </a>
+</div>
+
+        
+
+</div>
+ 
+  </div>
+
+<div th:replace="~{'/footer' :: siteFooter}"></div>
+<script src="/js/purchase.js"></script>
+
+
+</body>
+
+</html>

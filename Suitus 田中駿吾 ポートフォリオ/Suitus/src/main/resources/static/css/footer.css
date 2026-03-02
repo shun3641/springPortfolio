@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+/* 7. フッター */
+        footer {
+            background: #000;
+            color: white;
+            padding: 60px 5% 30px;
+            margin-top: 100px;
+        }
+        .footer-grid {
+        	width: 60%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+        .footer-col h4 { margin-bottom: 20px; color: var(--main-blue); }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col li { margin-bottom: 10px; font-size: 0.85rem; color: #aaa; }

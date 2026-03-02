@@ -25,16 +25,20 @@ Amazonプライム感謝祭実施中。セール会場はこちら
 	<ul>
 <!-- カテゴリー名を変更するときはparamの値とaタグのテキストを同一に変更すればよい
 	postgresql Itemsデータベースのフィールド名も書き換えておく -->
-	<li><a th:href="@{/items/ball(param='ボール')}">ボール</a></li>
-	<li><a th:href="@{/items/shoes(param='シューズ')}">シューズ</a></li>
-	<li><a th:href="@{/items/training(param='トレーニング')}">トレーニング</a></li>
-	<li><a th:href="@{/items/cap(param='キャップ')}">キャップ</a></li>
+	<li><a th:href="@{/items(category='ボール')}">ボール</a></li>
+	<li><a th:href="@{/items(category='シューズ')}">シューズ</a></li>
+	<li><a th:href="@{/items(category='トレーニング')}">トレーニング</a></li>
+	<li><a th:href="@{/items(category='キャップ')}">キャップ</a></li>
 	<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
+	<li class="logoutbtn" sec:authorize="hasAnyAuthority('ADMIN', 'USER')">
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="ログアウト"/>
+	</form>
+	</li>
 	<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
 	</ul>
 </nav>
 </div>
-
 <button class="c-hamburger-btn btn" aria-expanded="false" aria-controls="drawer-nav">
 	<span class="c-hamburger-btn__bars">
 		<span class="c-hamburger-btn__bar"></span>
@@ -44,10 +48,10 @@ Amazonプライム感謝祭実施中。セール会場はこちら
 </button>
 	<nav class="sp-menu">
 	<ul>
-		<li><a th:href="@{/items/ball(param='ボール')}">ボール</a></li>
-		<li><a th:href="@{/items/wear(param='ウェア')}">ウェア</a></li>
-		<li><a th:href="@{/items/training(param='トレーニング')}">トレーニング</a></li>
-		<li><a th:href="@{/items/cap(param='キャップ')}">キャップ</a></li>
+		<li><a th:href="@{/items(category='ボール')}">ボール</a></li>
+		<li><a th:href="@{/items(category='シューズ')}">シューズ</a></li>
+		<li><a th:href="@{/items(category='トレーニング')}">トレーニング</a></li>
+		<li><a th:href="@{/items(category='キャップ')}">キャップ</a></li>
 		<li class="loginbtn"><a th:href="@{/login}">ログイン</a></li>
 		<li><a th:href="@{/admin/application}" sec:authorize="hasAuthority('ADMIN')">業務管理アプリへ</a></li>
 	</ul>

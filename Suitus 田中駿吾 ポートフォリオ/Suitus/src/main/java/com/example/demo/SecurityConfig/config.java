@@ -33,7 +33,11 @@ public class config {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-            	.requestMatchers("/index","/login","/user/*").permitAll()
+            	//*** ログアウト後も表示できるものたち
+            	.requestMatchers("/index","/login","/user/*","/css/Topheader.css","/image/logo.png"
+            			,"/image/TopImage.jpg","/css/footer.css").permitAll()
+            	// ***
+            	
             	.requestMatchers("/admin/*").hasAuthority("ADMIN")
             	.anyRequest().authenticated()
             )
@@ -46,7 +50,7 @@ public class config {
                     )
                     .logout(logout -> logout
                             .logoutUrl("/logout")
-                            .logoutSuccessUrl("/login?logout")
+                            .logoutSuccessUrl("/logoutView")
                             .permitAll()
                         );
 

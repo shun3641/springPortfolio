@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログインページ | 業務用アプリケーション</title>
+
+<link th:href="@{/css/Topheader.css}" rel="stylesheet">
+
+	<style>
+	header button {
+		display: none;
+	}
+	</style>
+</head>
+<body class="bg-light">
+<div id="bgblack">
+<div th:replace="~{base :: siteHeader}"></div>
+</div>
+<h2 style="margin: 80px auto 0 auto;color: black;width: 60%;">ログアウトしました。</h2>
+
+</body>
+</html>

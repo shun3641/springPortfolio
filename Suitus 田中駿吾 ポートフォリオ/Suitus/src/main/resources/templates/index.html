@@ -4,9 +4,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<link th:href="@{/css/header.css}" rel="stylesheet">
+<link th:href="@{/css/Topheader.css}" rel="stylesheet">
 <link th:href="@{/css/mobile.css}" rel="stylesheet" media="screen and (max-width: 767px)">
+<link th:href="@{/css/footer.css}" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+        /* 在庫・状態バッジ */
+        .stock-info {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #666;
+        }
+        .out-of-stock {
+            color: #e44d26;
+            font-weight: bold;
+        }
+        
+        .about-section {
+        background-color: #fff;
+        padding: 80px 0;
+        border-top: 1px solid #eee;
+    }
 
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    .about-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        color: var(--dark-gray);
+        position: relative;
+    }
+
+    .about-title::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 4px;
+        background: var(--main-blue);
+        margin-top: 10px;
+    }
+
+    .about-subtitle {
+        font-size: 1.2rem;
+        color: var(--main-blue);
+        font-weight: bold;
+        margin: 20px 0 30px;
+    }
+
+    .mission-box {
+        background: var(--light-bg);
+        padding: 25px;
+        border-left: 5px solid var(--main-blue);
+        margin-bottom: 40px;
+    }
+
+    .mission-box h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+    }
+/* 会社概要テーブル形式 */
+    .company-info-table {
+        border-top: 1px solid #ddd;
+    }
+
+    .table-row {
+        display: flex;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+    }
+
+    .table-row .label {
+        width: 120px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    .table-row .value {
+        flex: 1;
+        color: #333;
+    }
+
+    /* 画像エリア */
+    .about-image img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 20px 20px 0px rgba(0, 123, 255, 0.1); /* 青い影をデザインアクセントに */
+    }
+
+    /* レスポンシブ対応 (スマホで縦並び) */
+    @media (max-width: 768px) {
+        .about-container {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .about-image {
+            order: -1; /* スマホでは画像を先に見せる */
+        }
+        .about-title {
+            font-size: 2rem;
+        }
+    }
+</style>
 <title>Suitus 田中駿吾作</title>
 </head>
 <body>
@@ -17,8 +125,54 @@
 <div class="topImage">
 <img src="/image/TopImage.jpg">
 </div>
+    <section class="about-section">
+    <div class="about-container">
+        <div class="about-content">
+            <h2 class="about-title" data-aos="fade-right" data-aos-delay="50">ABOUT US</h2>
+            <p class="about-subtitle">スポーツの力で、日常に情熱を。</p>
+            
+            <div class="mission-box">
+                <h3>Our Mission</h3>
+                <p>SuiTusは、プロフェッショナルからアマチュアまで、すべてのプレイヤーが最高のパフォーマンスを発揮できる「本物のギア」を提供することを使命としています。私たちが選ぶ一つ一つのアイテムには、勝利へのこだわりが詰まっています。</p>
+            </div>
+
+            <div class="company-info-table">
+                <div class="table-row">
+                    <span class="label">会社名</span>
+                    <span class="value">SuiTus Sports 株式会社</span>
+                </div>
+                <div class="table-row">
+                    <span class="label">所在地</span>
+                    <span class="value">東京都渋谷区神南 1-1-1 SuiTusビル</span>
+                </div>
+                <div class="table-row">
+                    <span class="label">設立</span>
+                    <span class="value">2020年 4月</span>
+                </div>
+                <div class="table-row">
+                    <span class="label">事業内容</span>
+                    <span class="value">スポーツ用品の輸入・販売、トレーニングウェアの企画開発</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about-image">
+            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSe_QCj6-GLZxwOaISPKMlt2aMg8Hpsy4_bdC9ymdSF6scgp80iNhefryvfD_bs" alt="会社イメージ">
+        </div>
+    </div>
+</section>
+
 </main>
+<div th:replace="~{'/footer' :: siteFooter}"></div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="/js/top.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // アニメーションの速度（ミリ秒）
+    once: true,     // スクロールを戻した時に再度実行しない（推奨）
+  });
+</script>
 </body>
 </html>

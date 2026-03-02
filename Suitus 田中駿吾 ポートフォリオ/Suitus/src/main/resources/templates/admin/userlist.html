@@ -19,7 +19,7 @@ xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/s
   <tbody th:each="user: ${users}">
     <tr>
       <th th:text="${user.id}">22</th>
-      <td scope="row" th:text="${user.username}"></td>
+      <td th:text="${user.username}"></td>
       <td th:text="${user.email}"></td>
     </tr>  
   </tbody>
