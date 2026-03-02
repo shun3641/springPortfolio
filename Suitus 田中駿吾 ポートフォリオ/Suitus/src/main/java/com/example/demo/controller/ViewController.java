@@ -48,31 +48,6 @@ public class ViewController {
 		return "index";
 	}
 
-	// th: /ball java: /{name}だとほかのマッピングurlと混同してくるため、
-	/// th: items/ball java: /items/{name}のカタチに必ずする。
-	@GetMapping("/items/{name}")
-	public String ball(@PathVariable String name, @RequestParam(value = "param", required = false) String param,
-			Model model) {
-
-		List<Items> items = itemRepository.findByCategory(param);
-
-		model.addAttribute("items", items);
-		// 条件式を表すCriteriaBuilderのインスタンスを生成。
-		// RootでItemsエンティティを指定
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Long> query = cb.createQuery(Long.class);
-		Root<Items> root = query.from(Items.class);
-
-		// selectメソッドを使ってエンティティの行数を数える
-		// さらに列categoryのparam("ボール等")データを抽出
-		query.select(cb.count(root));
-		query.where(cb.equal(root.get("category"), param));
-		Long total = entityManager.createQuery(query).getSingleResult();
-		model.addAttribute("total", total);
-
-		return "items";
-	}
-
 	@GetMapping("/login")
 	public String login(Model model) {
 		return "login";
